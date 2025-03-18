@@ -30,10 +30,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
-    
     'main_app',
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth',         # Thank You Django!
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -123,6 +122,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Add this variable to specify where successful logins should redirect to
+LOGIN_REDIRECT_URL = 'cat-index'
+LOGOUT_REDIRECT_URL = 'home'
+
+LOGOUT_REDIRECT_URL = 'home'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
