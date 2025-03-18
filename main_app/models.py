@@ -7,14 +7,21 @@ MEALS = (
     ('D', 'Dinner')
 )
 
+# Define the Toy model first
+class Toy(models.Model):
+    name = models.CharField(max_length=50)
+    color = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.name
 
-
+# Define the Cat model after the Toy model
 class Cat(models.Model):
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     age = models.IntegerField()
+    toys = models.ManyToManyField(Toy)
 
     def __str__(self):
         return self.name
@@ -24,7 +31,7 @@ class Cat(models.Model):
         # Use the 'reverse' function to dynamically find the URL for viewing this cat's details
         return reverse('cat-detail', kwargs={'cat_id': self.id})
 
-        # Add new Feeding model below Cat model
+# Add new Feeding model below Cat model
 class Feeding(models.Model):
     # The first optional positional argument overrides the label
     date = models.DateField('Feeding date')
@@ -42,3 +49,6 @@ class Feeding(models.Model):
 
     class Meta:
         ordering = ['-date']  # This line makes the newest feedings appear first
+
+    def get_absolute_url(self):
+        return reverse('toy-detail', kwargs={'pk': self.id})
